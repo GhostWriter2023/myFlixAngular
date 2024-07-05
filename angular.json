@@ -50,7 +50,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -71,9 +70,7 @@
             "development": {
               "optimization": false,
               "sourceMap": true,
-              "extractCss": false,
               "namedChunks": true,
-              "extractLicenses": false,
               "vendorChunk": true,
               "buildOptimizer": false
             }
@@ -120,10 +117,9 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
+          "options": {}          
         }
       }
     }
-  },
-  "defaultProject": "myFlixAngular"
+  }
 }
