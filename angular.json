@@ -22,12 +22,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": {
-              "base": "dist/myFlixAngular",
-              "browser": ""
-            },
+            "outputPath": "dist/myFlixAngular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -40,11 +37,7 @@
               }
             ],
             "styles": ["src/styles.scss"],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": false,
-            "ssr": false
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -77,60 +70,60 @@
             },
             "development": {
               "optimization": false,
+              "sourceMap": true,
+              "extractCss": false,
+              "namedChunks": true,
               "extractLicenses": false,
-              "sourceMap": true
+              "vendorChunk": true,
+              "buildOptimizer": false
             }
           },
           "defaultConfiguration": "production"
-      },
-      "serve": {
-        "builder": "@angular-devkit/build-angular:dev-server",
-        "options": {
-          "browserTarget": "myFlixAngular:build"
         },
-        "configurations": {
-          "production": {
-            "buildTarget": "myFlixAngular:build:production"
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "myFlixAngular:build"
           },
-          "development": {
-            "buildTarget": "myFlixAngular:build:development"
+          "configurations": {
+            "production": {
+              "browserTarget": "myFlixAngular:build:production"
+            },
+            "development": {
+              "browserTarget": "myFlixAngular:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "myFlixAngular:build"
           }
         },
-        "defaultConfiguration": "development"
-      },
-      "extract-i18n": {
-        "builder": "@angular-devkit/build-angular:extract-i18n",
-        "options": {
-          "browserTarget": "myFlixAngular:build"
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": ["src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
-      },
-      "test": {
-        "builder": "@angular-devkit/build-angular:karma",
-        "options": {
-          "polyfills": [
-            "zone.js",
-            "zone.js/testing"
-          ],
-          "tsConfig": "tsconfig.spec.json",
-          "inlineStyleLanguage": "scss",
-          "assets": [
-            {
-              "glob": "**/*",
-              "input": "public"
-            }
-          ],
-          "styles": [
-            "src/styles.scss"
-          ],
-          "scripts": []
-        }
-      },
-      "deploy": {
-        "builder": "angular-cli-ghpages:deploy",
-        "options": {}          
       }
     }
   },
   "defaultProject": "myFlixAngular"
 }
-
